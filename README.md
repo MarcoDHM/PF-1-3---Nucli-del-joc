@@ -1,50 +1,50 @@
-# PF 1/3 - Nucli del joc (Coin Collector 3D)
+# PF 1/3 - Núcleo del juego (Coin Collector 3D)
 
-**Pràctica UF2 — Programació del jugador en 3D**
+**Práctica UF2 — Programación del jugador en 3D**
 
-## Descripció
-Nucli jugable de **Coin Collector 3D**: una esfera controlada per físiques que es mou per un nivell recollint monedes amb triggers i límits d'escenari amb zona de mort (KillZone).
+## Descripción
+Núcleo jugable de **Coin Collector 3D**: una esfera controlada por físicas que se desplaza por un nivel recogiendo monedas mediante triggers, con límites de escenario y zona de muerte (KillZone).
 
-## Requisits Implementats
+## Requisitos Implementados
 
-### 1. Nivell
-- **Terra**: `Plane` horitzontal amb tag `Ground`.
-- **Parets invisibles**: 4 cubs delimitadors amb `MeshRenderer` desactivat i `Is Trigger = true`.
-- **KillZone**: Cub gran sota el nivell amb `Is Trigger = true` i `MeshRenderer` desactivat, amb el script `KillZone.cs` que mostra `"Player killed!"` per consola i reinicia l'escena.
+### 1. Nivel
+- **Suelo**: `Plane` horizontal con tag `Ground`.
+- **Paredes invisibles**: 4 cubos delimitadores con `MeshRenderer` desactivado e `Is Trigger = true`.
+- **KillZone**: Cubo grande situado bajo el nivel con `Is Trigger = true` y `MeshRenderer` desactivado, con el script `KillZone.cs` que muestra `"Player killed!"` por consola y reinicia la escena al caer el jugador.
 
 ### 2. Player
-- Esfera amb `Rigidbody`, `SphereCollider` i tag `Player`.
-- Moviment suau amb WASD o fletxes direccionals (`Horizontal` i `Vertical`).
-- Velocitat configurable des de l'Inspector (`speed`).
-- Moviment gestionat a `FixedUpdate` aplicant `linearVelocity` (conservant la velocitat en `Y`).
-- Rotació bloquejada (`Freeze Rotation X`, `Freeze Rotation Z`) evitant que la bola rodi.
+- Esfera con `Rigidbody`, `SphereCollider` y tag `Player`.
+- Movimiento fluido mediante WASD o flechas de dirección (`Horizontal` y `Vertical`).
+- Velocidad configurable desde el Inspector (`speed`).
+- Movimiento gestionado en `FixedUpdate` aplicando `linearVelocity` (conservando la componente en `Y`).
+- Rotación bloqueada (`Freeze Rotation X`, `Freeze Rotation Z`) para evitar que la bola ruede.
 
-### 3. Monedes & Prefabs
-- Prefab `Coin.prefab` amb material daurat diferenciat.
-- `SphereCollider` amb `Is Trigger = true`.
-- Script `Coin.cs` amb detecció mitjançant `OnTriggerEnter`:
-  - Afegeix `+1` punt al `GameManager`.
-  - Mostra a consola: `"Coin collected! Score: X"`.
-  - Es destrueix la moneda (`Destroy(gameObject)`).
-- 8 monedes col·locades al nivell (mínim 6 requerides).
+### 3. Monedas & Prefabs
+- Prefab `Coin.prefab` con material dorado diferenciado.
+- `SphereCollider` con `Is Trigger = true`.
+- Script `Coin.cs` con detección mediante `OnTriggerEnter`:
+  - Suma `+1` punto al `GameManager`.
+  - Muestra en consola: `"Coin collected! Score: X"`.
+  - Destruye la moneda (`Destroy(gameObject)`).
+- 8 monedas distribuidas por el nivel (el mínimo requerido eran 6).
 
 ### 4. GameManager
-- GameObject `GameManager` amb `GameManager.cs`.
-- Patró **Singleton** (`Instance`).
-- Gestió de puntuació (`score`).
-- Mètode `AddScore(int points)`.
-- Mètode `RestartLevel()` que recarrega l'escena activa mitjançant `SceneManager`.
+- GameObject `GameManager` con `GameManager.cs`.
+- Patrón **Singleton** (`Instance`).
+- Control de puntuación (`score`).
+- Método `AddScore(int points)`.
+- Método `RestartLevel()` que recarga la escena activa mediante `SceneManager`.
 
-### 5. Escenes i Build Settings
-- **`MenuPrincipal.unity`**: Pantalla inicial amb Canvas i botó "Play" per carregar el nivell 1.
-- **`Level1.unity`**: Escena de joc completa.
-- Ambdues escenes afegides als **Build Settings** de Unity en l'ordre correcte.
+### 5. Escenas y Build Settings
+- **`MenuPrincipal.unity`**: Pantalla inicial con Canvas y botón "Play" para cargar el nivel 1.
+- **`Level1.unity`**: Escena principal de juego.
+- Ambas escenas configuradas en los **Build Settings** de Unity en el orden correcto.
 
-### 6. Ampliacions Voluntàries (+2 punts)
-- **Giro en l'eix Y**: Script `Spinner.cs` rotant constantment les monedes.
-- **Flotació amunt i avall**: `Mathf.PingPong` aplicat a l'alçada de les monedes per donar un efecte visual dinàmic.
+### 6. Ampliaciones Voluntarias (+2 puntos)
+- **Giro en el eje Y**: Script `Spinner.cs` rotando continuamente las monedas.
+- **Flotación arriba y abajo**: `Mathf.PingPong` aplicado a la altura de las monedas para generar un efecto visual dinámico.
 
-## Estructura del Projecte
+## Estructura del Proyecto
 ```
 Assets/
 ├── Materials/
@@ -60,7 +60,6 @@ Assets/
     ├── Coin.cs
     ├── GameManager.cs
     ├── KillZone.cs
-    ├── MainMenu.cs
     ├── PlayerController.cs
     └── Spinner.cs
 ```
