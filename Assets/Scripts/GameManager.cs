@@ -31,4 +31,9 @@ public class GameManager : MonoBehaviour
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
         );
     }
+
+    public void LoadLevel1()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level1");
+    }
 }
